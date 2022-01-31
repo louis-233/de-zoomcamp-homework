@@ -1,6 +1,6 @@
 # (First-time build can take upto 10 mins.)
 
-# Our own customer airflow image
+# Our own custom airflow image
 # Why?
 # * We need third-party python libraries to be available in our DAGs, so we
 #   install them here.
