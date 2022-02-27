@@ -71,9 +71,9 @@ df.write.parquet('fhvhv/2021/02/')
 
 Next I looked up the size of the `fhvhv/2021/02` directory in the file explorer:
 
-`du -h` -> `221`
-`finder -> get info` -> `218.4 MB`
-`finder -> get info -> size on disk` -> `231.2 MB`
+* `du -h` -> `221`
+* `finder -> get info` -> `218.4 MB`
+* `finder -> get info -> size on disk` -> `231.2 MB`
 
 ## Question 3. Count records 
 
