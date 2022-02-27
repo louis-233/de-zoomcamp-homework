@@ -75,6 +75,10 @@ Next I looked up the size of the `fhvhv/2021/02` directory in the file explorer:
 * `finder -> get info` -> `218.4 MB`
 * `finder -> get info -> size on disk` -> `231.2 MB`
 
+Each part is `9.0MB` when using `ls -lah` in the `fhvhv/2021/02` directory.
+`9` (file size per partition) times `24` (number of paritions) is `216MB`.
+
+
 ## Question 3. Count records 
 
 How many taxi trips were there on February 15?
@@ -87,10 +91,10 @@ Consider only trips that started on February 15.
 from pyspark.sql.functions import dayofmonth
 
 df = spark.read.parquet('fhvhv/2021/02/')
-df.filter(dayofmonth(df.pickup_datetime) == 1).count()
+df.filter(dayofmonth(df.pickup_datetime) == 15).count()
 ```
 
-count is `176946`
+count is `367170`
 
 
 ## Question 4. Longest trip for each day
@@ -105,7 +109,13 @@ Trip starting on which day was the longest?
 ```py
 from pyspark.sql.functions import desc, unix_timestamp
 
-df.withColumn("duration", unix_timestamp(df.dropoff_datetime) -  unix_timestamp(df.pickup_datetime) ).orderBy(desc("duration")).limit(1).show()
+df\
+.withColumn(
+    "duration",
+    unix_timestamp(df.dropoff_datetime) -  unix_timestamp(df.pickup_datetime)
+)\
+.orderBy(desc("duration"))\
+.limit(1).show()
 ```
 
 the longest trip:
@@ -118,7 +128,7 @@ the longest trip:
 +-----------------+--------------------+-------------------+-------------------+------------+------------+-------+--------+
 ```
 
-75540 seconds
+75540 seconds long trip on February 11th.
 
 ## Question 5. Most frequent `dispatching_base_num`
 
