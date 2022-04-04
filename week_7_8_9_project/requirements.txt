@@ -1,0 +1,5 @@
+pandas
+pyarrow
+airflow
+apache-airflow-providers-google
+google-cloud-storage
